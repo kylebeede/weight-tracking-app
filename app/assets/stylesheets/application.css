@@ -14,6 +14,9 @@
  *= require_self
  */
 
+ *, *:before, *:after {
+    box-sizing: border-box;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -58,24 +61,25 @@ html, body {
     line-height: 1.2em;
     outline: none;
 }
-.weight-tracker-login {
+.weight-tracker__login {
+	padding-top: 100px;
 	max-width: 600px;
 	margin: 0 auto;
 	text-align: center;
 }
-.weight-tracker-login .app-title {
+.weight-tracker__login .app-title {
     font-weight: 300;
     font-size: 60px;
 }
-.weight-tracker-login form {
+.weight-tracker__login form {
 	max-width: 300px;
 	margin: 0 auto;
 }
-.weight-tracker-login .input-date,
-.weight-tracker-login .input-text {
+.weight-tracker__login .input-date,
+.weight-tracker__login .input-text {
 	margin-bottom: 15px;
 }
-.weight-tracker-login button {
+.weight-tracker__login button {
 	-webkit-box-shadow: 0px 1px 1px 0px rgba(217, 217, 217, 0.3);
 	-moz-box-shadow: 0px 1px 1px 0px rgba(217, 217, 217, 0.3);
 	box-shadow: 0px 1px 1px 0px rgba(217, 217, 217, 0.3);
@@ -87,4 +91,84 @@ html, body {
 	cursor: pointer;
 	border-radius: 3px;
 }
- 	
+
+/* HEADER */
+.mast-head {
+    top: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    height: 76px;
+    z-index: 99;
+    font-size: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #d0d4d9;
+    box-shadow: 0px 1px 1px #d0d4d9;
+}
+.weight-tracker .container {
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    max-width: 1200px;
+    min-width: 600px;
+    position: relative;
+}
+.mast-head .mast-head__container {
+	min-height: 100%;
+}
+.mast-head .mast-head__nav {
+    top: 22px;
+    right: 105px;
+    bottom: 22px;
+    left: 105px;
+    position: absolute;
+    width: auto;
+    height: 32px;
+    z-index: 3;
+}
+.mast-head .mast-head__nav .nav-list {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 0;
+    text-align: right;
+}
+.mast-head .mast-head__nav .nav-list .nav-list__item {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    position: relative;
+    line-height: 28px;
+}
+.weight-tracker .button-link {
+    font-size: 14px;
+    border: none;
+    background: none;
+    color: #007ee5;
+    outline: none;
+    margin: 0;
+    padding: 7px 16px;
+    border-radius: 5px;
+    filter: none;
+    text-decoration: none;
+}
+
+/* PROFILE */
+.user-profile h1,
+.user-profile h2 {
+	text-align: center;
+}
+
+/* FOOTER */
+.weight-tracker .footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+

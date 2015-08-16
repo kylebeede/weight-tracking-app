@@ -1,14 +1,4 @@
-<% provide(:title, "Weight Tracker") %>
-<div class="weight-tracker-login">
+<section class="weight-tracker__login">
 	<h1 class="app-title">Weight Tracker</h1>
-	<form>
-        <div class="input-text">
-            <input placeholder="username" autofocus="" type="text">
-        </div>
-        <div class="input-text">
-            <input placeholder="password" type="password">
-        </div>
-		<button>Sign up for free</button>
-		<p>Already a member? <a href="">Login</a></p>
-    </form>
-</div>
+    <%= render 'users/create_user_form' %>
+</section>
