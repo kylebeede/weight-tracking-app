@@ -73,7 +73,7 @@ html, body {
 }
 .weight-tracker__login form {
 	max-width: 300px;
-	margin: 30px auto 0;
+	margin: 30px auto 20px;
 }
 .weight-tracker__login .input-date,
 .weight-tracker__login .input-text {
