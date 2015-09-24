@@ -20,3 +20,15 @@
 		</nav>
 	</div>
 </header>
+<script>
+	$(document).ready(function(){
+		var navLink = document.querySelector( ".header-account-menu .header-nav-link" );
+		var subNav = document.querySelector( ".header-account-menu .sub-nav" );
+
+		if (navLink) {
+			navLink.addEventListener( "click", function(){
+				$(subNav).toggleClass("active");
+			});
+		}
+	});
+</script>
