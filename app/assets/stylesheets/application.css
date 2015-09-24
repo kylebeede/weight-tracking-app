@@ -61,6 +61,10 @@ html, body {
     line-height: 1.2em;
     outline: none;
 }
+.weight-tracker {
+    padding: 76px;
+}
+/* Login */
 .weight-tracker__login {
 	padding-top: 100px;
 	max-width: 600px;
@@ -150,13 +154,14 @@ html, body {
     background-color: #FFF;
     border: 1px solid #EFEFEF;
     margin-top: 8px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 20px;
     display: none;
 }
 .mast-head .mast-head__nav .nav-list .sub-nav.active {
     display: block;
+}
+.mast-head .mast-head__nav .nav-list .sub-nav ul {
+    padding: 0;
 }
 .mast-head .mast-head__nav .nav-list .sub-nav li {
     list-style-type: none;
