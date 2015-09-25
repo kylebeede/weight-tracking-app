@@ -1,0 +1,14 @@
+<% provide(:title, "Forgot password") %>
+<section class="weight-tracker__forgot-password">
+  <h1 class="app-title">Forgot your password?</h1>
+  <p>Enter your email address to reset your password.</p>
+  <%= form_for(:password_reset, url: password_resets_path, :html => {:class => 'forgot-password__form'}) do |f| %>
+
+    <div class="input-text">
+      <%= f.email_field :email, :placeholder => 'email', class: 'form-control' %>
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+
+  <% end %>
+</section>

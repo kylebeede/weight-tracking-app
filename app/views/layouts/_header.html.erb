@@ -2,7 +2,7 @@
 	<div class="mast-head__container container">
 		<nav class="mast-head__nav">
 			<ul class="nav-list">
-				<% if logged_in? %>
+				<% if @user && logged_in? %>
 					<li class="nav-list__item header-account-menu">
 						<a class="header-nav-link"><%= @user.name %></a>
 						<div class="sub-nav">
