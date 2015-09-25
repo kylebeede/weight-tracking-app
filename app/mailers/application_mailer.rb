@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "kyle@localhost:3000"
+  default from: "WeightTracker <no-reply@weighttracker.herokuapp.com>"
   layout 'mailer'
 end
