@@ -37,4 +37,13 @@ class UsersControllerTest < ActionController::TestCase
   	assert flash.empty?
   	assert_redirected_to root_url
   end
+
+  test "should redirect home after user is deleted" do
+    log_in_as(@user)
+    assert_difference 'User.count', -1 do
+      patch :destroy, id: @user
+    end
+    assert_not flash.empty?
+    assert_redirected_to root_url
+  end
 end

@@ -4,4 +4,9 @@
   
   <%= render 'edit_user_form' %>
   
+  <% if current_user?(@user) %>
+    <%= link_to "delete", @user, method: :delete,
+                                    data: { confirm: "You're about to delete your account. All your data will be lost. Are you sure you want to do this?" } %>
+    <% end %>
+
 </section>
