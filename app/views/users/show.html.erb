@@ -2,95 +2,98 @@
 <section class="user-profile container">
 	<h1><%= @user.name %>&rsquo;s profile</h1>
 </section>
-<section class="weight-entry-container">
-	<% if logged_in? %>
-		<div>
-			<%= form_for(@weight_entry) do |f| %>
-				<%= render 'shared/error_messages', object: f.object %>
-				<div class="field">
-					<%= f.text_area :value, placeholder: "100" %>
-				</div>
-				<%= f.submit "Submit", class: "btn btn-primary" %>
-			<% end %>
-		</div>
-	<% end %>
-	<% if @user.weight_entries.any? %>
-		<h3>Weight entries (<%= @user.weight_entries.count %>)</h3>
-		<ol>
-			<% @user.weight_entries.each do |entry| %>
-				<li><%= entry.value %> on <%= entry.created_at.to_date %></li>
-			<% end %>
-		</ol>
-	<% end %>
-</section>
-<section class="weight-entry-graph" style="width: 1000px; max-height: 700px; margin: 0 auto;">
-	<canvas id="canvas" height="450" width="600"></canvas>
+<div class="weight-entries">
+	<section class="weight-entries__new">
+		<% if logged_in? %>
+			<h3>New entry</h3>
+			<div>
+				<%= form_for @weight_entry, :html => {class: "new-weight-entry"} do |f| %>
+					<%= render 'shared/error_messages', object: f.object %>
+					<%= f.text_field :value, placeholder: "100", class: "value" %>
+					<%= f.submit "Submit", class: "btn btn-primary" %>
+				<% end %>
+			</div>
+		<% end %>
+	</section>
+	<section class="weight-entries__graph">
+		<canvas id="canvas" height="450" width="600"></canvas>
 
-	<script>
-		function randomColorFactor() {
-			return Math.round(Math.random() * 255);
-		}
-		function randomColor(opacity) {
-			return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
-		}
-
-		var config = {
-			type: 'line',
-			data: {
-				datasets: [{
-					label: "Weight entries",
-					data: [
-						<% @user.weight_entries.each do |entry| %>
-							{
-								x: "<%= entry.created_at.to_date %>",
-								y: <%= entry.value %>
-							}, 
-						<% end %>
-					],
-					fill: false
-				}]
-			},
-			options: {
-				responsive: true,
-				scales: {
-					xAxes: [{
-						type: "time",
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Date'
-						}
-					}, ],
-					yAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Weight'
-						}
-					}]
-				}
+		<script>
+			function randomColorFactor() {
+				return Math.round(Math.random() * 255);
 			}
-		};
+			function randomColor(opacity) {
+				return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+			}
 
-		$.each(config.data.datasets, function(i, dataset) {
-			dataset.borderColor = randomColor(0.4);
-			dataset.backgroundColor = randomColor(0.5);
-			dataset.pointBorderColor = randomColor(0.7);
-			dataset.pointBackgroundColor = randomColor(0.5);
-			dataset.pointBorderWidth = 1;
-		});
+			var config = {
+				type: 'line',
+				data: {
+					datasets: [{
+						label: "Weight entries",
+						data: [
+							<% @user.weight_entries.each do |entry| %>
+								{
+									x: "<%= entry.created_at.to_date %>",
+									y: <%= entry.value %>
+								}, 
+							<% end %>
+						],
+						fill: false
+					}]
+				},
+				options: {
+					responsive: true,
+					scales: {
+						xAxes: [{
+							type: "time",
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Date'
+							}
+						}, ],
+						yAxes: [{
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Weight'
+							}
+						}]
+					}
+				}
+			};
 
-		window.onload = function() {
-			var ctx = document.getElementById("canvas").getContext("2d");
-			window.myLine = new Chart(ctx, config);
+			$.each(config.data.datasets, function(i, dataset) {
+				dataset.borderColor = randomColor(0.4);
+				dataset.backgroundColor = randomColor(0.5);
+				dataset.pointBorderColor = randomColor(0.7);
+				dataset.pointBackgroundColor = randomColor(0.5);
+				dataset.pointBorderWidth = 1;
+			});
 
-			updateLegend();
-		};
+			window.onload = function() {
+				var ctx = document.getElementById("canvas").getContext("2d");
+				window.myLine = new Chart(ctx, config);
 
-		function updateLegend() {
-			$legendContainer = $('#legendContainer');
-			$legendContainer.empty();
-			$legendContainer.append(window.myLine.generateLegend());
-		}
-	</script>
-</section>
+				updateLegend();
+			};
+
+			function updateLegend() {
+				$legendContainer = $('#legendContainer');
+				$legendContainer.empty();
+				$legendContainer.append(window.myLine.generateLegend());
+			}
+		</script>
+	</section>
+	<section class="weight-entries__previous">
+		<% if @user.weight_entries.any? %>
+			<h3>Previous entries (<%= @user.weight_entries.count %>)</h3>
+			<ol>
+				<% @user.weight_entries.each do |entry| %>
+					<li><%= entry.value %> on <%= entry.created_at.to_date %></li>
+				<% end %>
+			</ol>
+		<% end %>
+	</section>
+</div>
