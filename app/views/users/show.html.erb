@@ -17,64 +17,36 @@
 	<% if @user.weight_entries.any? %>
 		<h3>Weight entries (<%= @user.weight_entries.count %>)</h3>
 		<ol>
-			<%= render @weight_entries %>
+			<% @user.weight_entries.each do |entry| %>
+				<li><%= entry.value %> on <%= entry.created_at.to_date %></li>
+			<% end %>
 		</ol>
 	<% end %>
 </section>
-<section class="weight-entry-graph">
+<section class="weight-entry-graph" style="width: 1000px; max-height: 700px; margin: 0 auto;">
 	<canvas id="canvas" height="450" width="600"></canvas>
 
 	<script>
-		function randomScalingFactor() {
-			return Math.round(Math.random() * 100 * (Math.random() > 0.5 ? -1 : 1));
-		}
 		function randomColorFactor() {
 			return Math.round(Math.random() * 255);
 		}
 		function randomColor(opacity) {
 			return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
 		}
-		function newDate(days) {
-			return moment().add(days, 'd').toDate();
-		}
-		function newDateString(days) {
-			return moment().add(days, 'd').format();
-		}
 
 		var config = {
 			type: 'line',
 			data: {
 				datasets: [{
-					label: "Dataset with string point data",
-					data: [{
-						x: newDateString(0),
-						y: randomScalingFactor()
-					}, {
-						x: newDateString(2),
-						y: randomScalingFactor()
-					}, {
-						x: newDateString(4),
-						y: randomScalingFactor()
-					}, {
-						x: newDateString(5),
-						y: randomScalingFactor()
-					}],
-					fill: false
-				}, {
-					label: "Dataset with date object point data",
-					data: [{
-						x: newDate(0),
-						y: randomScalingFactor()
-					}, {
-						x: newDate(2),
-						y: randomScalingFactor()
-					}, {
-						x: newDate(4),
-						y: randomScalingFactor()
-					}, {
-						x: newDate(5),
-						y: randomScalingFactor()
-					}],
+					label: "Weight entries",
+					data: [
+						<% @user.weight_entries.each do |entry| %>
+							{
+								x: "<%= entry.created_at.to_date %>",
+								y: <%= entry.value %>
+							}, 
+						<% end %>
+					],
 					fill: false
 				}]
 			},
@@ -93,7 +65,7 @@
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'value'
+							labelString: 'Weight'
 						}
 					}]
 				}
