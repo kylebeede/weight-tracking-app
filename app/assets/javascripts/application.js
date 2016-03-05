@@ -14,3 +14,7 @@
 // = require jquery_ujs
 // = require turbolinks
 // = require_tree .
+
+//= require moment.min.js
+//= require chart.min.js
+//= require jquery.min.js

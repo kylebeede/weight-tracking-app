@@ -4,6 +4,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @weight_entry = current_user.weight_entries.build if logged_in?
+    @weight_entries = current_user.weight_entries
   end
 
   def new
