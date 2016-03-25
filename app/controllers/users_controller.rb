@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def show
-    @user = User.find(params[:id])
+    if logged_in?
+      @user = User.find(current_user[:id])
+    else
+      @user = User.find(params[:id]) 
+    end
     @weight_entry = current_user.weight_entries.build if logged_in?
     @weight_entries = current_user.weight_entries
   end
@@ -50,7 +54,6 @@ class UsersController < ApplicationController
   	end
 
     # Before filters
-
     # Confirms a logged-in user
     def logged_in_user
       unless logged_in?

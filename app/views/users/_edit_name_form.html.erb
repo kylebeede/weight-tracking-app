@@ -1,0 +1,9 @@
+<%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages' %>
+    
+    <div class="input-text">
+        <%= f.text_field :name, :placeholder => 'name', class: 'form-control' %>
+    </div>
+
+    <%= f.submit "Change name", class: "btn btn-primary" %>
+<% end %>
